@@ -10,13 +10,7 @@ const port =process.env.PORT || 2000;
 app.use(cors())
 app.use(express.json())
 
-console.log(process.env.DB_User,process.env.DB_Pass);
-
-
-
 const uri = `mongodb://${process.env.DB_User}:${process.env.DB_Pass}@ac-v3pf2i9-shard-00-00.aic4ezy.mongodb.net:27017,ac-v3pf2i9-shard-00-01.aic4ezy.mongodb.net:27017,ac-v3pf2i9-shard-00-02.aic4ezy.mongodb.net:27017/?ssl=true&replicaSet=atlas-s0bfev-shard-0&authSource=admin&appName=Cluster1`;
-
-//  const uri = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster1.aic4ezy.mongodb.net/?appName=Cluster1`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -145,5 +139,3 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`Example app listening on port ${port}`);
   });
 }
-
-module.exports = app;
