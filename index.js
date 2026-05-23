@@ -37,8 +37,21 @@ async function run() {
   app.get('/coffees', async(req,res) => {
     //  const cursor = coffeeCollection.find();
     //  const result = await cursor.toArray();
-     const result = await coffeeCollection.find().toArray();
-     res.send(result);
+    try{
+      const result = await coffeeCollection.find().toArray();
+      res.send(result);
+    } catch {
+      console.error(err);
+      res.status(500).json({
+        success: false,
+        error: err.messaage
+      })
+    }
+     
+  })
+
+  app.get('/test', async(req, res) => {
+    res.send("Test is working");
   })
 
   app.get('/coffees/:id', async(req,res) => {
@@ -51,10 +64,19 @@ async function run() {
   // create data or post data 
 
   app.post('/coffees', async(req,res) => {
-     const newCoffee = req.body;
-     console.log(newCoffee);
-     const result = await coffeeCollection.insertOne(newCoffee);
-     res.send(result);
+    try {
+      const newCoffee = req.body;
+      console.log(newCoffee);
+      const result = await coffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    } catch(err) {
+      console.error(err);
+      res.status(500).json({
+        success: false,
+        error: err.messaage
+      })
+    }
+     
   })
    
   // update data 
@@ -134,6 +156,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
+
+module.exports = app;
