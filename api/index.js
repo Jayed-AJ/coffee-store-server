@@ -146,9 +146,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-// const port =process.env.PORT || 2000;
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
+const port =process.env.PORT || 2000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 module.exports = app;
